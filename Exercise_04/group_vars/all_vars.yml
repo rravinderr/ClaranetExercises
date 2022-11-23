@@ -1,0 +1,26 @@
+---
+# Define hosting environment
+hosting_infrastructure: aws
+
+# Define AWS region.
+aws_region: "us-east-1"
+
+# Define environment name
+env_id: "acwordpress"
+
+# DNS domain
+dns_domain: "{{ env_id }}.com"
+
+# Define the AWS default image
+# AWS Console -> EC2 -> Pick one from the availables
+aws_image: ami-0b0dcb5067f052a63
+
+# Set the SSH keypair with EC2 Instances
+aws_key_name: "key-pair23112022"
+
+# Availability zone of resources
+aws_zone: "us-east-1a"
+
+# Second AZ if multi-AZ is needed during cloudformation deployment
+aws_zone2: "us-east-1b"
+

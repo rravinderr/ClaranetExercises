@@ -1,0 +1,39 @@
+---
+
+#Override default image
+#aws_image: "{{ aws_image}}"
+
+#   Cloud Formation Stack Name
+stack_name: "Ec2Instances"
+
+
+#Establish server hostname
+server_name: "server01.acwordpress.com"
+server_name2: "server02.acwordpress.com"
+
+#Type of AWS instance
+aws_instancetype: "t2.medium"
+
+#Establish  server subnets
+#AWS console -> Search: VPC -> available subnets
+subnet: subnet-0b1ea8e44f4cd4af2    # us-east-1a
+subnet2: subnet-02cf47ad0061dc216   # us-east-1b
+
+# Establish EBS Encryption key
+ebs_key: "a88c052d-589f-4db9-ad8e-b9dd544cd4e8"
+
+
+# Establish private Route53 DNS zone
+private_hosted_zone: Z08632801JANRF04KK6XY
+
+# Establish VPC
+vpc_id: vpc-06a5a02b5d4a7097c
+
+#Disks to attach to instance
+disks:
+  - name: "root_volume"
+    type: "gp2"
+    size: "100"
+    device_name: "/dev/sda1"
+
+

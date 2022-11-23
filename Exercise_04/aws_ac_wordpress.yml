@@ -1,0 +1,54 @@
+# 1. Provisioning EC2 Instances 
+- name: Deploying servers on AWS with CloudFormation
+  hosts: Ec2Instances
+  connection: local
+  gather_facts: False
+  become: no
+  vars_files:
+    - "group_vars/all_vars.yml"
+    - "group_vars/servers_vars.yml"
+  tasks:
+    - name: Provisioning in AWS using cloudformation template
+      cloudformation:
+        stack_name: "{{ stack_name }}"
+        state: "present"
+        region: "{{ aws_region }}"
+        disable_rollback: true
+        template: "files/template.yml"
+        template_parameters:
+          Image: "{{ aws_image }}"
+          KeyPairName: "{{ aws_key_name }}"
+          InstanceType: "{{ aws_instancetype }}"
+          EnvId: "{{ env_id }}"
+          RootVolumeName: "{{ disks[0].device_name }}"
+          RootVolumeType: "{{ disks[0].type }}"
+          RootVolumeSize: "{{ disks[0].size }}"
+          ServerDomain: "{{ dns_domain }}"
+          ServerName: "{{ server_name }}"
+          ServerName2: "{{ server_name2 }}"
+          AwsZone: "{{aws_zone}}"
+          AwsZone2: "{{aws_zone2}}"
+          EBSkey: "{{ebs_key}}"
+          Subnet: "{{subnet}}"
+          Subnet2: "{{subnet2}}"
+          PrivateRoute53HostedZone: "{{private_hosted_zone}}"
+          VPC: "{{vpc_id}}"
+      when: hosting_infrastructure == "aws"
+
+
+# 2. Configuration
+
+- name: Configure web and deployment
+  hosts: Ec2Instances
+  become: True
+  gather_facts: True
+  roles:
+    - apache
+    - php
+    #- database
+    #- wordpress
+
+
+# TO DO...
+
+# For the idea: check readme file
