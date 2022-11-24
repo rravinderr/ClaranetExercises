@@ -3,7 +3,7 @@
 Claranet Exercises - deadline 23_11_2022
 
 
-## Some comments: 
+## Some comments - exercise 4: 
 
 This was my very first project of this kind. Very interesting!
 Although it gave me the possibility to learn a lot, the project is partially completed:
